@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - A4291_Final_Project_NET_Frontend</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/app.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/A4291_Final_Project_NET_Frontend.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+    <div class="wrapper">
+        <nav id="sidebar" class="sidebar js-sidebar">
+            <div class="sidebar-content js-simplebar">
+                <a class="sidebar-brand" href="/mahasiswa">
+                    <span class="align-middle">E-Ura</span>
+                </a>
+
+                <ul class="sidebar-nav">
+                    <li class="sidebar-header fs-4">
+                        Pasien
+                    </li>
+                    <li class="sidebar-item <?= isset($page) && $page == 'home' ? 'active' : '' ?>">
+                        <a class="sidebar-link" href="{{ route('general.pasien') }}">
+                            <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">
+                                Home
+                            </span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item <?= isset($page) && $page == 'gula.mingguan' ? 'active' : '' ?>">
+                        <a class="sidebar-link" href="{{ route('general.gula-darah') }}">
+                            <i class="align-middle" data-feather="file-text"></i> <span class="align-middle">
+                                Gula Darah
+                            </span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item <?= isset($page) && $page == 'riwayat' ? 'active' : '' ?>">
+                        <a class="sidebar-link">
+                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">
+                                Tensi
+                            </span>
+                        </a>
+                    </li>
+                  
+                </ul>
+            </div>
+        </nav>
+        <div class="main">
+            <nav class="navbar navbar-expand navbar-light navbar-bg">
+                <a class="sidebar-toggle js-sidebar-toggle">
+                    <i class="hamburger align-self-center"></i>
+                </a>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav navbar-align">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                Selamat Datang {{ auth()->user()->name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a class="dropdown-item" href="/pasien/profile">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-user align-middle me-1">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg> Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+
+
+                                <button type="button" class="dropdown-item"  data-bs-toggle="modal"
+                                        data-bs-target="#logoutModal">
+                                    Log out
+                                </button>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+  
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+        
+
+
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">
+                            <i class="align-middle"
+                               data-feather="log-out"></i>&nbsp;Logout
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Are you sure you want to exit the system?</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <form>
+                            
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" id="logoutButton" class="btn btn-danger">Logout</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+        <script>
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                localStorage.removeItem('jwtToken');
+                window.location.href = "/Login";
+            });
+
+
+            </script>
+    
+</body>
+</html>
