@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - A4291_Final_Project_NET_Frontend</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/app.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/A4291_Final_Project_NET_Frontend.styles.css" asp-append-version="true" />
+</head>
+<body>
+
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="index.html">
+					<span class="align-middle">E-Utang</span>
+				</a>
+
+				<ul class="sidebar-nav">
+					<li class="sidebar-header fs-4">
+						Lender
+					</li>
+					<li class="sidebar-header">
+						Pages
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" asp-area="" asp-controller="Lender" asp-action="Index">
+							<i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Home</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" asp-area="" asp-controller="Lender" asp-action="Loan">
+							<i class="align-middle" data-feather="user"></i> <span class="align-middle">Loans</span>
+						</a>
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link"  asp-area="" asp-controller="Lender" asp-action="HistoryLoan">
+							<i class="align-middle" data-feather="log-in"></i> <span class="align-middle">HistoryLoan</span>
+						</a>
+					</li>
+
+					
+					</ul>
+					
+
+				
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+						
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+								<img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
+								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
+								<div class="dropdown-divider"></div>
+								<button type="button" class="dropdown-item" data-bs-toggle="modal"
+										data-bs-target="#logoutModal">
+									Log out
+								</button>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<div class="container mb-3">
+						<main role="main" class="pb-1">
+							@RenderBody()
+						</main>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+				<div class="container-fluid">
+					<div class="row text-muted">
+						<div class="col-6 text-start">
+							<p class="mb-0">
+								<a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>A4291</strong></a> - <a class="text-muted" href="https://adminkit.io/" target="_blank"><strong>Final_Project_NET_Frontend</strong></a>								&copy;
+							</p>
+						</div>
+						<div class="col-6 text-end">
+							<ul class="list-inline">
+								<li class="list-inline-item">
+									<a class="text-muted" href="https://adminkit.io/" target="_blank">Final .Net</a>
+								</li>
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+        
+
+
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logoutModalLabel">
+                            <i class="align-middle"
+                               data-feather="log-out"></i>&nbsp;Logout
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <strong>Are you sure you want to exit the E-Utang?</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        
+                            
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" id="logoutButton" class="btn btn-danger">Logout</button>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+     
+
+        <script>
+            document.getElementById("logoutButton").addEventListener("click", function () {
+                localStorage.removeItem('jwtToken');
+                window.location.href = "/Login";
+            });
+            </script>
+       
+    
+</body>
+</html>

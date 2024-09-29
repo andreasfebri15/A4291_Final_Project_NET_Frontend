@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_layout_Lender";
+}
+
+<h1 class="h3 mb-3"><strong>Lender</strong> Balance</h1>
+<div class=" text-end mb-3">
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addBalanceModal" id="btnAddBalance">Tambah Saldo</button>
+</div>
+<div class="row ">
+	<div class="col-xl-6 col-xxl-5 d-flex">
+		<div class="w-100">
+			<div class="row ">
+				<div class="col-sm-7">
+					<div class="card text-center">
+						<div class="card-body">
+							<div class="row">
+								<div class="col mt-0">
+									<h5 class="card-title" >Amount Balance</h5>
+								</div>
+
+								<div class="col-auto">
+									<div class="stat text-primary">
+										<i class="align-middle" data-feather="truck"></i>
+									</div>
+								</div>
+							</div>
+							<h1 class="mt-1 mb-3" id="Amount"></h1>
+							
+						</div>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+	</div>
+</div>
+
+<div class="modal fade" id="addBalanceModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Tambah Saldo</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    
+                    <div class="form-group">
+                        <label for="userBalance">Balance</label>
+						<input type="number" class="form-control" id="balanceAmount" required>
+                    </div>
+                    <input type="hidden" id="userId">
+                </form>
+            </div>
+            <div class="modal-footer">
+				<button type="button" class="btn btn-primary" onclick="addBalance()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/Balance.js"></script>
+
+<script>
+	document.getElementById('btnAddBalance').addEventListener('click', function () {
+		$('#addBalanceModal').modal('show');
+	});
+</script>

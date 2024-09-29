@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_layout_Borrower";
+}
+
+<h1>Request Borrowser</h1>
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="card">
+
+            <div class="card-body">
+                <div class=" text-end mb-3">
+                    <button class="btn btn-primary" id="btnAddLoan" data-toggle="modal" data-target="#addLoanModal">Request Loan</button>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="tableBase">
+                                <thead>
+                                    <tr>
+
+                                        <th class="text-center">Jumlah Pinjaman</th>
+                                        <th class="text-center">Bunga</th>
+                                        <th class="text-center">Durasi</th>
+                                        <th class="text-center">Status</th>
+
+
+                                </thead>
+                                <tbody>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addLoanModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalLabel">Request Loan</h5>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm">
+                    <div class="form-group">
+                        <label for="userName">Jumlah Pinjaman</label>
+                        <input type="text" class="form-control" id="amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userBalance">Bunga</label>
+                        <input type="number" class="form-control" id="userBalance" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userBalance">Durasi</label>
+                        <input type="number" class="form-control" id="userBalance" required>
+                    </div>
+                    <input type="hidden" id="userId">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="RequestLoan()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/datatables.min.js"></script>
+
+<script>
+    document.getElementById('btnAddLoan').addEventListener('click', function () {
+        $('#addLoanModal').modal('show');;
+    });
+</script>
+<script src="~/js/Loans.js"></script>
