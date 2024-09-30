@@ -126,6 +126,26 @@ namespace A4291_Final_Project_NET_Frontend.Controllers.Api
             }
         }
 
+		[HttpPost]
+		public async Task<IActionResult> AddUser([FromBody] ReqRegistrasiUsers reqRegisterDto)
+		{
+			var token = Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+			_httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-    }
+			var json = JsonSerializer.Serialize(reqRegisterDto);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+			var response = await _httpClient.PostAsync("https://localhost:7037/api/AddUser", content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				var responData = await response.Content.ReadAsStringAsync();
+				return Ok(responData);
+			}
+			else
+			{
+				return BadRequest("Failed to add user.");
+			}
+		}
+	}
 }

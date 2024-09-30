@@ -158,4 +158,43 @@ function deleteUser(id) {
         });
 }
 
+async function AddUser() {
+    try {
+        const name = document.getElementById('addName').value;
+        const email = document.getElementById('addEmail').value;
+        const role = document.getElementById('addRole').value;
+
+        const reqRegisterDto = {
+            name: name,
+            email: email,
+            role: role
+        }
+        console.log(reqRegisterDto);
+
+        const token = localStorage.getItem('jwtToken');
+
+        const response = await fetch(`/ApiMstUsers/AddUser`, {
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reqRegisterDto)
+        })
+
+        const result = await response.json();
+        if (response.ok) {
+            alert(result.message);
+            $('#addUserModal').modal('hide');
+            fetchUsers();
+        }
+        else {
+            alert(result.message || 'Add user failed. Please try again.');
+        }
+    }
+    catch (error) {
+        alert('Errord adding user: ' + error.message)
+    }
+}
+
 

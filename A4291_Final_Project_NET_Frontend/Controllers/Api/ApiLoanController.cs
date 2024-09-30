@@ -75,5 +75,26 @@ namespace A4291_Final_Project_NET_Frontend.Controllers.Api
 				return BadRequest("Create Loan Failed");
 			}
 		}
-	}
+
+        [HttpGet]
+        public async Task<IActionResult> GetLoans(string borrowerId)
+        {
+            if (string.IsNullOrEmpty(borrowerId))
+            {
+                return BadRequest("Borrower id cannot be null or empty");
+            }
+           
+            var response = await _httpClient.GetAsync($"https://localhost:7037/rest/v1/loan/GetLoanByBorrowerId/{borrowerId}");
+            Console.WriteLine(response);
+            if (response.IsSuccessStatusCode)
+            {
+                var responData = await response.Content.ReadAsStringAsync();
+                return Ok(responData);
+            }
+            else
+            {
+                return BadRequest("Get All Loans Failed");
+            }
+        }
+    }
 }

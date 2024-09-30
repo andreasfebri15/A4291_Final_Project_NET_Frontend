@@ -15,7 +15,7 @@
 
 
     const jsonData = await response.json();
-    console.log(jsonData);
+    //console.log(jsonData);
 
     if (jsonData.success) {
         document.getElementById('Amount').textContent = jsonData.data.balance;
@@ -79,7 +79,7 @@ async function addBalance() {
 
             $('#addBalanceModal').modal('hide');
             alert('Balance added successfully');
-            fetchLender();
+            fetchSaldo();
         } else {
             alert('User not found');
         }

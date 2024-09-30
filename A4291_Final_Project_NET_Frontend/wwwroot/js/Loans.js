@@ -2,7 +2,7 @@
     const borrowerId = localStorage.getItem('id');
     //const token = localStorage.getItem('jwtToken');
 
-    const response = await fetch(`/ApiMstLoan/GetLoans?borrowerId=${borrowerId}`, {
+    const response = await fetch(`/ApiLoan/GetLoans?borrowerId=${borrowerId}`, {
         method: 'GET'
     });
     console.log(response);
@@ -23,7 +23,7 @@
 }
 
 function populateBorrowerLoansTable(loans) {
-    const loanTableBody = document.querySelector('#loanTable tbody');
+    const loanTableBody = document.querySelector('#tableBase tbody');
     loanTableBody.innerHTML = '';
     loans.forEach(loan => {
         const currencyFormat = new Intl.NumberFormat('en-ID', {
@@ -33,17 +33,19 @@ function populateBorrowerLoansTable(loans) {
         amount = currencyFormat.format(loan.amount)
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${amount}</td>
-            <td>${loan.interestRate} (2.5%)</td>
-            <td>${loan.duration} months</td>
-            <td>${loan.status}</td>
-            <td>
-                <button class="btn btn-primary btn-sm">Detail</button>
+            <td class="text-center">${amount}</td>
+            <td class="text-center">${loan.interestRate} (2.5%)</td>
+            <td class="text-center">${loan.duration} Bulan</td>
+            <td class="text-center">${loan.status}</td>
+            <td class="text-center">
+                <button class="btn btn-primary btn-sm ">Detail</button>
             </td>
             `;
         loanTableBody.appendChild(row);
     });
 }
+window.onload = fetchBorrowerLoans()
+
 
 async function RequestLoan() {
     try {
